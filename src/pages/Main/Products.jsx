@@ -58,7 +58,7 @@ function Products() {
   const getShits = async e => {
     const array = []
     const parasha = []
-    await axios.get("http://localhost:3001/shits")
+    await axios.get(process.env.REACT_APP_SHITS_URL)
     .then(e => {
       parasha.push(e.data)
     })
