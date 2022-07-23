@@ -1,54 +1,94 @@
 import React from 'react'
-import { 
-  Modal, 
-  ModalOverlay, 
-  ModalContent, 
-  ModalHeader, 
-  ModalFooter, 
-  ModalBody, 
-  ModalCloseButton, 
-  Input, 
-  IconButton, 
-  Button, 
-  Tooltip, 
-  useDisclosure, 
-  Box, 
-  NumberInput, 
-  NumberInputField,  
-  NumberInputStepper, 
-  NumberIncrementStepper, 
-  NumberDecrementStepper, 
-  Badge} from '@chakra-ui/react'
-
+import axios from "axios"
 import Card from "../../components/Card"
 
+import { Input,IconButton,Button,Tooltip,Box } from '@chakra-ui/react'
+
+import { useDebouncedValue } from "@mantine/hooks"
+
 import { BiSearchAlt } from 'react-icons/bi'
-import { BsFillCartFill } from 'react-icons/bs'
+import { IoIosArrowDropupCircle } from 'react-icons/io'
 
 import elfbar from '../../images/elfbar-logo.jpg'
-import axios from "axios"
-import { useDebouncedValue } from "@mantine/hooks"
+import parasha from '../../service/db.json'
+import { ScrollContext } from "./Main"
 
 function Products() {
 
   const [opened, setOpened] = React.useState(false);
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {targetRef} = React.useContext(ScrollContext)
 
+  const [all, setAll] = React.useState([])
   const [shits, setShits] = React.useState([])
-  const [sorted, setSorted] = React.useState([])
   const [search, setSearch] = React.useState('')
-  const [debounced] = useDebouncedValue(search, 400)
   const [shit, setShit] = React.useState({})
-  const [cart, setCart] = React.useState([])
+  
+  const [debounced] = useDebouncedValue(search, 400)
 
-  const searched = sorted.filter(e => {
+  const [sorted, setSorted] = React.useState({
+    price: "all",
+    puffs: 0,
+    taste: ''
+  })
+
+
+  const sortPrice = () => {
+    const q = [...shits].sort((a, b) => { return b?.price - a?.price} )
+    const w = [...shits].sort((a, b) => { return a?.price - b?.price} )
+
+    switch (sorted.price) {
+      case "all": 
+        setShits(q)
+        setSorted({...sorted, price: "min"})
+        break
+      case "min": 
+        setShits(w)
+        setSorted({...sorted, price: "max"})
+        break
+      case "max": 
+        setShits([...all])
+        setSorted({...sorted, price: "all"})
+        break
+    }
+  }
+
+  const sortSize = () => {
+    const q = [...all].filter(a => { return a.puffs === 1500})
+    const w = [...all].filter(a => { return a.puffs === 3000})
+    const e = [...all].filter(a => { return a.puffs === 4000})
+    const r = [...all].filter(a => { return a.puffs === 5000})
+    
+    switch (sorted.puffs) {
+      case 0: 
+        setSorted({...sorted, puffs: 1500})
+        setShits(q)
+        break
+      case 1500: 
+        setSorted({...sorted, puffs: 3000})
+        setShits(w)
+        break
+      case 3000: 
+        setSorted({...sorted, puffs: 4000})
+        setShits(e)
+        break
+      case 4000: 
+        setSorted({...sorted, puffs: 5000})
+        setShits(r)
+        break
+      case 5000: 
+        setSorted({...sorted, puffs: 0})
+        setShits([...all])
+        break
+    }
+  }
+
+  const searched = shits.filter(e => {
     return e.name?.toLowerCase().includes(debounced.toLowerCase())
   })
 
   const handleAddToCart = e => {
     setShit(e)
-    setCart([...cart, e])
   }
 
   const handleShow = e => {
@@ -57,74 +97,70 @@ function Products() {
 
   const getShits = async e => {
     const array = []
-    const parasha = []
-    await axios.get(process.env.REACT_APP_SHITS_URL)
-    .then(e => {
-      parasha.push(e.data)
-    })
-    .catch(e => {
-      console.log(e);
-    })
-    await axios.get("http://localhost:3001/bigshits")
-    .then(e => {
-      for (let i = 0; i < 3; i++) {
-        array.push([...e.data[i].shits])
-      }
-    })
-    .catch(e => {
-      console.log(e);
-    })
-    setShits([...parasha[0], ...array.flat()])
-    setSorted([...parasha[0], ...array.flat()].sort((a, b) => a.name.localeCompare(b.name)))
+    const huinya = []
+    huinya.push(parasha.shits)
+    for (let i = 0; i < 3; i++) {
+      array.push([...parasha.bigshits[i].shits])
+    }
+    setAll([...huinya[0], ...array.flat()].sort((a, b) => a.name.localeCompare(b.name)))
+    setShits([...huinya[0], ...array.flat()].sort((a, b) => a.name.localeCompare(b.name)))
   }
 
   React.useEffect(e => {
     getShits()
   }, [])
 
-  const [count, setCount] = React.useState({})
-
-  React.useEffect(e => {
-    const coun = {};
-    
-    cart.forEach(e => {
-      coun[`${e.name} - ${e.puffs}`] = (coun[`${e.name} - ${e.puffs}`] || 0) + 1;
-    })
-
-    setCount({...count, ...coun})
-  }, [cart])
-
   const is5000 = shit.puffs === 5000
+
+  const priceSort = (sorted.price === "max" || sorted.price === "min") && "Цена:"
+  const sizeSort = (sorted.puffs === 1500 && "1500" || sorted.puffs === 3000 || sorted.puffs === 4000 || sorted.puffs === 5000) && "Обьём:"
 
   return (
     <>
-      <div className="bg-slate-800 lg:h-screen p-6 lg:p-14">
+      <div className="bg-slate-800 lg:h-screen p-6 lg:p-14" ref={targetRef}>
         <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] rounded-2xl h-full w-full bg-white shadow-lg overflow-hidden">
           <div className="flex flex-col">   
             <div className="flex justify-between items-center bg-white">
               <img src={elfbar} alt="" className="w-36 ml-4" />
-              <div className="hidden lg:flex gap-8 mr-16">
-                <Button variant={"link"}>ЦЕНА</Button>
-                <Button variant={"link"}>ОБЬЕМ</Button>
-                <Button variant={"link"}>ВКУС</Button>
+              <div className="hidden lg:flex gap-8 mr-4">
+                <Button variant={"link"} onClick={sortPrice} disabled={sizeSort} >ЦЕНА</Button>
+                <Button variant={"link"} onClick={sortSize} >ОБЬЕМ</Button>
               </div>
             </div>
             <div className="p-4">
-              <div className="flex max-w-xs">
-                <Input bgColor={"white"} placeholder="Поиск по названию..." value={search} onChange={e => setSearch(e.target.value)} />
-                <Tooltip label="Поиск">
-                  <IconButton 
-                    icon={<BiSearchAlt/>} 
-                    colorScheme={"teal"} 
-                    size={"md"} 
-                    fontSize={"xl"} 
-                    variant="my" 
-                    borderRadius={"md"} 
-                    textColor="white" 
-                  />
-                </Tooltip>
+              <div className="flex justify-between h-16">
+                <div className="flex max-w-xs">
+                  <Input bgColor={"white"} placeholder="Поиск по названию..." value={search} onChange={e => setSearch(e.target.value)} />
+                  <Tooltip label="Поиск">
+                    <IconButton 
+                      icon={<BiSearchAlt/>} 
+                      colorScheme={"teal"} 
+                      size={"md"} 
+                      fontSize={"xl"} 
+                      variant="my" 
+                      borderRadius={"md"} 
+                      textColor="white" 
+                    />
+                  </Tooltip>
+                </div>
+                <div className="flex flex-col items-end font-body">
+                  <div className="flex gap-2 text-lg">
+                    <span>
+                      {priceSort}
+                    </span>
+                    <span> 
+                      {(sorted.price === "max" && "по возрастанию") || (sorted.price === "min" && "по убыванию")}
+                    </span>
+                  </div>
+                  <div className="flex gap-2 text-lg">
+                    <span>{sizeSort}</span>
+                    <span>
+                      {(sorted.puffs === 1500 && 1500) || (sorted.puffs === 3000 && 3000) || (sorted.puffs === 4000 && 4000) || (sorted.puffs === 5000 && 5000)}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="max-w-full grid auto-rows-auto grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 overflow-y-scroll max-h-[610px] p-2 ">
+              <div className="max-w-full grid auto-rows-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 overflow-y-scroll max-h-[610px] p-2 ">
                 {searched.length !== 0 && searched.map((e, i) => {
                   return <Card key={i} shit={e} handleAddToCart={handleAddToCart} handleShow={handleShow} />
                 })}
@@ -148,48 +184,32 @@ function Products() {
                 bgRepeat={"no-repeat"}
                 bgPosition={`${is5000 ? "center" : "bottom"}`}
               >
-                <div className="flex justify-between">
-                  <div className="flex gap-2">
-                    <Button variant={"my"} textColor={"white"} onClick={e => handleAddToCart(shit)} >
-                      Добавить в корзину
-                    </Button>
-                    <Button 
-                      variant={"ghost"} 
-                      onClick={e => setOpened(q => !q)} 
-                      textColor={shit.puffs > 1500 ? "black" : "white"} 
-                      _hover={{bg: "teal.400", textColor: "white"}} 
-                      borderRadius={"full"} 
-                    >
-                      Подробнее
-                    </Button>
-                  </div>
-                  <Tooltip label="Корзина">
-                    <Badge>
-                      <IconButton 
-                        icon={<BsFillCartFill/>} 
-                        size={"md"} 
-                        fontSize={"xl"} 
-                        variant="my" 
-                        textColor={"white"} 
-                        onClick={e => onOpen()}
-                      />
-                    </Badge>
-                  </Tooltip>
-                </div>
               </Box>
               {/* <BottomSheet onOpen={open} isOpen={opened} onClose={close} onToggle={onToggle} /> */}
-              <div className={`${opened ? "-translate-y-1/2" : "translate-y-0"} transition-all duration-300 ease-in-out h-screen bg-black w-full`}>
-                <div>
-                <NumberInput textColor={"white"} >
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
+              <div className={`${opened ? "-translate-y-1/2" : "translate-y-0"} relative transition-all duration-300 ease-in-out h-screen bg-black w-full`}>
+                <div onClick={e => setOpened(q => !q)} className="flex justify-center my-4">
+                  <span className={`${opened ? "rotate-180" : "rotate-0"} transition-all duration-200 text-4xl animate-pulse text-white`}>
+                    <IoIosArrowDropupCircle/>
+                  </span>
                 </div>
-                <div className="text-white">
-                  <h2 className="uppercase font-head font-semibold text-2xl mb-6 ml-4 mt-4">{shit.name}</h2>
+                <div className="text-white font-body">
+                  <div className="flex justify-between px-4 pb-4">
+                    <div>
+                      <h3 className="text-xl md:text-2xl">{shit.puffs === 1500 ? `${shit.puffs} LUX` : `BC${shit.puffs}`}</h3>
+                      <h3 className="uppercase font-head font-semibold text-xl md:text-2xl">{shit.name}</h3>
+                    </div>
+                    <div className="flex flex-col items-end">
+                      <h3 className="text-xl md:text-2xl">
+                        {`${shit.priceRub}руб`}
+                      </h3>
+                      <h3 className="text-xl md:text-2xl">
+                        {`${shit?.price}тнг`}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <p className="italic">{shit.puffs === 1500 ? `"Минимальный закказ от 400 штук"` : `"Минимальный заказ от 300 штук"`}</p>
+                  </div>
                   <h3 className="text-xl ml-4 mb-4">Характеристики</h3>
                   <ul className="">
                     <li className="flex gap-4 border-t p-4">
@@ -198,7 +218,7 @@ function Products() {
                     </li>
                     <li className="flex gap-4 border-t p-4">
                       <span>Никотин:</span>
-                      <span>{shit.nicotion}:</span>
+                      <span>{shit.nicotion}</span>
                     </li>
                     <li className="flex gap-4 border-t p-4">
                       <span>Батарея (ёмкость):</span>
@@ -213,122 +233,19 @@ function Products() {
                       <span>{shit.puffs}</span>
                     </li>
                   </ul>
+                  <div className="p-4 text-slate-300">
+                    <p>
+                      (Никотин вызывает зависимость, а также вредит вашему здоровью)
+                    </p>
+                  </div>
                 </div>
               </div>
             </Box>
           )}
         </div>
       </div>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size="2xl"
-        scrollBehavior="inside"
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Корзина</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <div>
-              {cart.map((e, i) => {
-                return (
-                  <div key={i} className="flex items-center justify-between">
-                    <div className="flex items-center gap-x-4"> 
-                      <img src={e.thumbnail} alt="" className="w-24" />
-                      <div>
-                        <p className="font-semibold uppercase font-head">{e.name}</p>
-                        <p >{e.puffs}</p>
-                      </div>
-                    </div>
-                    <div>
-                      <p className="flex justify-end gap-4">
-                        <span>Колво:</span>
-                        <span>300</span>
-                      </p>
-                      <p className="flex justify-end gap-4">
-                        <span>Цена:</span>
-                        <span>3000</span>
-                      </p>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='teal' mr={3} onClick={onClose}>
-              Закрыть
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </>
   )
 }
-
-// function BottomSheet({ isOpen, onClose, onOpen, onToggle }) {
-//   const prevIsOpen = usePrevious(isOpen);
-//   const controls = useAnimation();
-
-
-//   function onDragEnd(event, info) {
-//     const shouldClose =
-//       info.velocity.y > 20 || (info.velocity.y >= 0 && info.point.y > 45);
-//     if (shouldClose) {
-//       controls.start("hidden");
-//       onClose();
-//     } else {
-//       controls.start("visible");
-//       onOpen();
-//     }
-//   }
-
-//   React.useEffect(() => {
-//     if (prevIsOpen && !isOpen) {
-//       controls.start("hidden");
-//     } else if (!prevIsOpen && isOpen) {
-//       controls.start("visible");
-//     }
-//   }, [controls, isOpen, prevIsOpen]);
-
-
-//   return (
-//     <motion.div
-//       drag="y"
-//       onDragEnd={onDragEnd}
-//       initial="hidden"
-//       animate={controls}
-//       transition={{
-//         type: "spring",
-//         damping: 20,
-//         stiffness: 400
-//       }}
-//       variants={{
-//         visible: { y: '-50%' },
-//         hidden: { y: 0 }
-//       }}
-//       dragConstraints={{ top: 0}}
-//       dragElastic={0.8}
-//       className="relative bg-black h-screen w-full"
-//     >
-//       <motion.div
-//         className={`w-24 h-2 bg-white absolute left-1/2  -translate-x-1/2 -top-5 rounded-full cursor-pointer`}
-//       >  
-//       </motion.div>
-//     </motion.div>
-//   );
-// }
-
-// function usePrevious(value) {
-//   const previousValueRef = React.useRef();
-
-//   React.useEffect(() => {
-//     previousValueRef.current = value;
-//   }, [value]);
-
-//   return previousValueRef.current;
-// }
 
 export default Products
