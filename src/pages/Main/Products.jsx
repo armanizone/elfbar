@@ -2,7 +2,7 @@ import React from 'react'
 import axios from "axios"
 import Card from "../../components/Card"
 
-import { Input,IconButton,Button,Tooltip,Box } from '@chakra-ui/react'
+import { Input,IconButton,Button,Tooltip,Box, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
 
 import { useDebouncedValue } from "@mantine/hooks"
 
@@ -12,6 +12,8 @@ import { IoIosArrowDropupCircle } from 'react-icons/io'
 import elfbar from '../../images/elfbar-logo.jpg'
 import parasha from '../../service/db.json'
 import { ScrollContext } from "./Main"
+
+const tastes = ['banana', 'blue razz', 'blueberry', 'coffe', 'cranberry grape', 'energy', 'grape', 'kiwi', 'lemon', 'mango', 'watermelon', 'strawberry', 'mojito']
 
 function Products() {
 
@@ -29,58 +31,71 @@ function Products() {
   const [sorted, setSorted] = React.useState({
     price: "all",
     puffs: 0,
-    taste: ''
+    taste: 'all'
   })
 
-
-  const sortPrice = () => {
+  const sortPrice = (name) => {
     const q = [...shits].sort((a, b) => { return b?.price - a?.price} )
     const w = [...shits].sort((a, b) => { return a?.price - b?.price} )
 
-    switch (sorted.price) {
+    switch (name) {
       case "all": 
+        setShits([...all])
+        setSorted({...sorted, price: "all"})
+        break
+      case "min": 
         setShits(q)
         setSorted({...sorted, price: "min"})
         break
-      case "min": 
+      case "max": 
         setShits(w)
         setSorted({...sorted, price: "max"})
-        break
-      case "max": 
-        setShits([...all])
-        setSorted({...sorted, price: "all"})
         break
     }
   }
 
-  const sortSize = () => {
+  const sortSize = (name) => {
     const q = [...all].filter(a => { return a.puffs === 1500})
     const w = [...all].filter(a => { return a.puffs === 3000})
     const e = [...all].filter(a => { return a.puffs === 4000})
     const r = [...all].filter(a => { return a.puffs === 5000})
     
-    switch (sorted.puffs) {
+    switch (name) {
       case 0: 
-        setSorted({...sorted, puffs: 1500})
-        setShits(q)
-        break
-      case 1500: 
-        setSorted({...sorted, puffs: 3000})
-        setShits(w)
-        break
-      case 3000: 
-        setSorted({...sorted, puffs: 4000})
-        setShits(e)
-        break
-      case 4000: 
-        setSorted({...sorted, puffs: 5000})
-        setShits(r)
-        break
-      case 5000: 
         setSorted({...sorted, puffs: 0})
         setShits([...all])
         break
+      case 1500: 
+        setSorted({...sorted, puffs: 1500})
+        setShits(q)
+        break
+      case 3000: 
+        setSorted({...sorted, puffs: 3000})
+        setShits(w)
+        break
+      case 4000: 
+        setSorted({...sorted, puffs: 4000})
+        setShits(e)
+        break
+      case 5000: 
+        setSorted({...sorted, puffs: 5000})
+        setShits(r)
+        break
     }
+  }
+
+  const sortTaste = (name) => {
+    console.log(name);
+    if (name !== 'all') {
+      const q = [...all].filter(e => {
+        return e.name?.includes(name)
+      })
+      setShits(q)
+      setSorted({...sorted, taste: name})
+      return
+    }
+    setSorted({...sorted, taste: 'all'})
+    setShits([...all])
   }
 
   const searched = shits.filter(e => {
@@ -112,9 +127,6 @@ function Products() {
 
   const is5000 = shit.puffs === 5000
 
-  const priceSort = (sorted.price === "max" || sorted.price === "min") && "Цена:"
-  const sizeSort = (sorted.puffs === 1500 && "1500" || sorted.puffs === 3000 || sorted.puffs === 4000 || sorted.puffs === 5000) && "Обьём:"
-
   return (
     <>
       <div className="bg-slate-800 lg:h-screen p-6 lg:p-14" ref={targetRef}>
@@ -123,8 +135,63 @@ function Products() {
             <div className="flex justify-between items-center bg-white">
               <img src={elfbar} alt="" className="w-36 ml-4" />
               <div className="hidden lg:flex gap-8 mr-4">
-                <Button variant={"link"} onClick={sortPrice} disabled={sizeSort} >ЦЕНА</Button>
-                <Button variant={"link"} onClick={sortSize} >ОБЬЕМ</Button>
+                <Menu >
+                  <MenuButton className="font-body">
+                    Цена
+                    <span>
+                      {
+                        (sorted.price === "all" && ": все") ||
+                        (sorted.price === "max" && ": по возрастанию") || 
+                        (sorted.price === "min" && ": по убыванию")
+                      }
+                    </span>
+                  </MenuButton>
+                  <MenuList className="font-body">
+                    <MenuItem onClick={e => sortPrice("all")} >Все</MenuItem>
+                    <MenuItem onClick={e => sortPrice("min")} >По убыванию</MenuItem>
+                    <MenuItem onClick={e => sortPrice("max")} >По возрастанию</MenuItem>
+                  </MenuList>
+                </Menu>
+                <Menu>
+                  <MenuButton className="font-body">
+                    Обьем
+                    <span>
+                      {
+                        (sorted.puffs === 0 && `: все`) ||
+                        (sorted.puffs === 1500 && `: 1500`) || 
+                        (sorted.puffs === 3000 && `: 3000`) || 
+                        (sorted.puffs === 4000 && `: 4000`) || 
+                        (sorted.puffs === 5000 && `: 5000`)
+                      }
+                    </span>
+                  </MenuButton>
+                  <MenuList className="font-body">
+                    <MenuItem onClick={e => sortSize(0)} >Все</MenuItem>
+                    <MenuItem onClick={e => sortSize(1500)} >1500</MenuItem>
+                    <MenuItem onClick={e => sortSize(3000)} >3000</MenuItem>
+                    <MenuItem onClick={e => sortSize(4000)} >4000</MenuItem>
+                    <MenuItem onClick={e => sortSize(5000)} >5000</MenuItem>
+                  </MenuList>
+                </Menu>
+                <Menu>
+                  <MenuButton className="font-body">
+                    Вкус
+                    <span>
+                      {
+                        (sorted.taste === "all" && `: все`) ||
+                        (sorted.taste !== "all" && `: ${sorted.taste}`) 
+                      }
+                    </span>
+                  </MenuButton>
+                  <MenuList className="font-body" overflow={"scroll"} h={"64"}>
+                    <MenuItem onClick={e => sortTaste('all')} >Все</MenuItem>
+                    {tastes.map((e, i) => {
+                      return (
+                        <MenuItem key={i} onClick={() => sortTaste(e)} >{e}</MenuItem>
+                      )
+                    })}
+                  </MenuList>
+                </Menu>
               </div>
             </div>
             <div className="p-4">
@@ -142,22 +209,6 @@ function Products() {
                       textColor="white" 
                     />
                   </Tooltip>
-                </div>
-                <div className="flex flex-col items-end font-body">
-                  <div className="flex gap-2 text-lg">
-                    <span>
-                      {priceSort}
-                    </span>
-                    <span> 
-                      {(sorted.price === "max" && "по возрастанию") || (sorted.price === "min" && "по убыванию")}
-                    </span>
-                  </div>
-                  <div className="flex gap-2 text-lg">
-                    <span>{sizeSort}</span>
-                    <span>
-                      {(sorted.puffs === 1500 && 1500) || (sorted.puffs === 3000 && 3000) || (sorted.puffs === 4000 && 4000) || (sorted.puffs === 5000 && 5000)}
-                    </span>
-                  </div>
                 </div>
               </div>
               <div className="max-w-full grid auto-rows-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 overflow-y-scroll max-h-[610px] p-2 ">
@@ -208,7 +259,7 @@ function Products() {
                     </div>
                   </div>
                   <div className="p-4">
-                    <p className="italic">{shit.puffs === 1500 ? `"Минимальный закказ от 400 штук"` : `"Минимальный заказ от 300 штук"`}</p>
+                    <p className="italic">{shit.puffs === 1500 ? `"Минимальный заказ от 400 штук"` : `"Минимальный заказ от 300 штук"`}</p>
                   </div>
                   <h3 className="text-xl ml-4 mb-4">Характеристики</h3>
                   <ul className="">
