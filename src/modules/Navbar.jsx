@@ -7,30 +7,30 @@ import { ScrollContext } from "../pages/Main/Main"
 
 function Navbar() {
 
-  const {scrollIntoView} = React.useContext(ScrollContext)
+  const {handleScroll} = React.useContext(ScrollContext)
 
   return (
     <div className="w-full z-30 text-white border-b border-b-gray-400">
       <div className="container">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col md:flex-row justify-between items-center">
           <div>
             <span className="text-xl md:text-2xl lg:text-3xl font-body">
               ELFBAR
             </span>
           </div>
-          <div className="hidden lg:flex gap-6 font-semibold uppercase text-lg font-head">
-            <p onClick={e => scrollIntoView({aligment: 'center'})}>Продукты</p>
-            <p >Обзор</p>
-            <p>Контакты</p>
+          <div className="flex gap-6 font-semibold uppercase text-sm md:text-lg font-head my-4 md:my-0">
+            <p onClick={e => handleScroll('products')} className="cursor-pointer">Продукты</p>
+            <p onClick={e => handleScroll('about')} className="cursor-pointer">Обзор</p>
+            <p onClick={e => handleScroll('order')} className="cursor-pointer">Контакты</p>
           </div>
-          <div className="flex flex-col lg:flex-row text-2xl" >
-            <div className="border-x p-4 md:p-8" >
+          <div className="flex text-2xl justify-between w-full items-center md:w-auto">
+            <div className="md:border-x md:w-full md:flex md:justify-center p-4 md:p-8" >
               <AiOutlineMail/>
             </div>
-            <div className="p-4 md:p-8" >
+            <div className="md:w-full md:flex md:justify-center p-4 md:p-8" >
               <AiOutlineWhatsApp/>
             </div>
-            <div className="border-x p-4 md:p-8" >
+            <div className="md:border-x md:w-full md:flex md:justify-center p-4 md:p-8" >
               <AiOutlineWhatsApp/>
             </div>
           </div>

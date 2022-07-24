@@ -4,15 +4,13 @@ import Navbar from "../../modules/Navbar"
 
 import parasha1 from '../../images/1.png'
 import parasha2 from '../../images/2.png'
-import parasha3 from '../../images/3.png'
 import parasha4 from '../../images/4.png'
 import parasha5 from '../../images/5.png'
-import { motion } from "framer-motion"
 
 function Hero() {
 
 
-  const trans = keyframes`
+  const trans = keyframes` 
     0% 
       {
         transform: translate(0px, 0px)
@@ -34,10 +32,6 @@ function Hero() {
   const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease-in-out 1.32s`
   const animation4 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease-in-out 1.98s`
 
-  const firstVariants = {
-
-  }
-
 
   return (
     <>
@@ -48,9 +42,9 @@ function Hero() {
           <div className="relative w-full h-full hero-shadow bg-teal-400 z-20 rounded-2xl overflow-hidden">
             <div className="absolute clip-path-inner bg-slate-700 h-full w-full top-0 left-0 -z-10"></div>
             <Navbar/>
-            <div className="grid place-items-center h-full">
+            <div className="grid md:place-items-center h-full">
               <div className="container flex flex-col md:flex-row justify-between items-center gap-x-16 text-white">
-                <div className=" z-10 max-w-md">
+                <div className="mt-8 z-10 max-w-md">
                   <div className="text-5xl md:text-6xl lg:text-8xl mb-8 font-bold" >
                     ELFBAR LUX
                   </div>

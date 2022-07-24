@@ -1,8 +1,7 @@
 import React from 'react'
-import axios from "axios"
 import Card from "../../components/Card"
 
-import { Input,IconButton,Button,Tooltip,Box, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
+import { Input, IconButton, Tooltip,Box, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
 
 import { useDebouncedValue } from "@mantine/hooks"
 
@@ -17,9 +16,9 @@ const tastes = ['banana', 'blue razz', 'blueberry', 'coffe', 'cranberry grape', 
 
 function Products() {
 
+  const {target, targetRef, ref} = React.useContext(ScrollContext)
+  
   const [opened, setOpened] = React.useState(false);
-
-  const {targetRef} = React.useContext(ScrollContext)
 
   const [all, setAll] = React.useState([])
   const [shits, setShits] = React.useState([])
@@ -39,10 +38,6 @@ function Products() {
     const w = [...shits].sort((a, b) => { return a?.price - b?.price} )
 
     switch (name) {
-      case "all": 
-        setShits([...all])
-        setSorted({...sorted, price: "all"})
-        break
       case "min": 
         setShits(q)
         setSorted({...sorted, price: "min"})
@@ -50,6 +45,10 @@ function Products() {
       case "max": 
         setShits(w)
         setSorted({...sorted, price: "max"})
+        break
+      default: 
+        setShits([...all])
+        setSorted({...sorted, price: "all"})
         break
     }
   }
@@ -61,10 +60,6 @@ function Products() {
     const r = [...all].filter(a => { return a.puffs === 5000})
     
     switch (name) {
-      case 0: 
-        setSorted({...sorted, puffs: 0})
-        setShits([...all])
-        break
       case 1500: 
         setSorted({...sorted, puffs: 1500})
         setShits(q)
@@ -81,11 +76,14 @@ function Products() {
         setSorted({...sorted, puffs: 5000})
         setShits(r)
         break
+      default: 
+        setSorted({...sorted, puffs: 0})
+        setShits([...all])
+        break
     }
   }
 
   const sortTaste = (name) => {
-    console.log(name);
     if (name !== 'all') {
       const q = [...all].filter(e => {
         return e.name?.includes(name)
@@ -129,7 +127,7 @@ function Products() {
 
   return (
     <>
-      <div className="bg-slate-800 lg:h-screen p-6 lg:p-14" ref={targetRef}>
+      <div className="bg-slate-800 lg:h-screen p-6 lg:p-14" ref={target === 'products' ? targetRef : ref}>
         <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] rounded-2xl h-full w-full bg-white shadow-lg overflow-hidden">
           <div className="flex flex-col">   
             <div className="flex justify-between items-center bg-white">
@@ -185,7 +183,7 @@ function Products() {
                   </MenuButton>
                   <MenuList className="font-body" overflow={"scroll"} h={"64"}>
                     <MenuItem onClick={e => sortTaste('all')} >Все</MenuItem>
-                    {tastes.map((e, i) => {
+                    {tastes.sort().map((e, i) => {
                       return (
                         <MenuItem key={i} onClick={() => sortTaste(e)} >{e}</MenuItem>
                       )

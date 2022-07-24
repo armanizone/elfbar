@@ -59,12 +59,12 @@ const labels = [
 
 function AboutUs() {
 
-  const {target2} = React.useContext(ScrollContext)
+  const {target, targetRef, ref} = React.useContext(ScrollContext)
 
   return (
     <Box
       className="w-full pt-8"
-      ref={target2}
+      ref={target === 'about' ? targetRef : ref}
     >
         <div className="flex flex-col text-white h-full justify-between">
           <Box 

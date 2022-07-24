@@ -6,8 +6,13 @@ import shit5000 from '../../images/5000.jpg'
 import shit5000Mobile from '../../images/5000-mobile.jpg'
 import kazakhstan from '../../images/kazakhstan.png'
 import russia from '../../images/russia.png'
+import { ScrollContext } from "./Main"
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { db } from "../../service/firebase"
 
 function Order() {
+
+  const {target, targetRef, ref} = React.useContext(ScrollContext)
 
   const [order, setOrder] = React.useState({
     name: '',
@@ -43,7 +48,10 @@ function Order() {
     e.preventDefault()
     shitSchema.validate(order, { abortEarly: false })
     .then(e => {
-      console.log(e);
+      addDoc(collection(db, "elfbarBid"), {
+        ...order,
+        timestamp: serverTimestamp()
+      })
     })
     .catch(e => {
       console.log(e);
@@ -54,6 +62,7 @@ function Order() {
   return (
     <Box 
       className="w-full py-8 z-50 bg-teal-400"
+      ref={target === 'order' ? targetRef : ref}
     >
       <Box  
         className="grid md:grid-cols-[65%_35%] overflow-hidden bg-white max-w-6xl mx-auto md:rounded-tr-[50px] md:rounded-bl-[50px] " 
@@ -77,7 +86,6 @@ function Order() {
               name="name"
               className={errors?.name?.[0] && "input-animation"}
             />
-            {/* {errors?.name?.[0] && <p className="text-white">{errors?.name?.[0]}</p>} */}
             <Input 
               borderRadius={"full"} 
               bgColor={"white"}
@@ -90,7 +98,6 @@ function Order() {
               className={errors?.tel?.[0] && "input-animation"}
 
             />
-            {/* {errors?.tel?.[0] && <p className="text-white">{errors?.tel?.[0]}</p>} */}
             <Input 
               borderRadius={"full"} 
               bgColor={"white"}
@@ -114,9 +121,6 @@ function Order() {
               name="whatsapp"
               className={errors?.whatsapp?.[0] && "input-animation"}
             />
-            {/* {(errors?.whatsapp?.[0] || errors?.telegram?.[0]) && (
-              <p className="text-white">{errors?.whatsapp?.[0] || errors?.telegram?.[0]}</p>
-            )} */}
             <Button variant={"my"} type="submit" bgColor={"white"} textColor={"black"} >
               Отправить
             </Button>
@@ -143,7 +147,6 @@ function Order() {
             </p>
             <div className="w-16 h-0.5 bg-white mx-auto"> </div>
           </div>
-
         </div>
       </Box>
     </Box>
