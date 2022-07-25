@@ -1,8 +1,12 @@
 import React from 'react'
-import { Box, Button } from "@chakra-ui/react"
+import { Box, Button, Image, keyframes, usePrefersReducedMotion } from "@chakra-ui/react"
 
-import smoke from '../../images/smoke_wide.png'
 import { ScrollContext } from "./Main"
+
+import parasha1 from '../../images/11.png'
+import parasha2 from '../../images/22.png'
+import parasha3 from '../../images/33.png'
+import smoke from '../../images/smoke_wide.png'
 
 
 const labels = [
@@ -61,6 +65,27 @@ function AboutUs() {
 
   const {target, targetRef, ref} = React.useContext(ScrollContext)
 
+  const trans = keyframes` 
+  0% 
+    {
+      transform: translate(0px, 0px)
+    }
+  50% 
+    { 
+      transform: translate(10px, 15px); 
+    }
+  100%
+    { 
+      transform: translate(0px); 
+    }
+`
+
+const prefersReducedMotion = usePrefersReducedMotion()
+
+const animation1 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease-in-out`
+const animation2 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease-in-out 0.66s`
+const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease-in-out 1.32s`
+
   return (
     <Box
       className="w-full pt-8"
@@ -69,22 +94,31 @@ function AboutUs() {
         <div className="flex flex-col text-white h-full justify-between">
           <Box 
             className="flex flex-col relative"
-            bgImage={smoke}
-            bgRepeat={"no-repeat"}
-            bgSize={"contain"}
-            bgPosition={"right"}
           >
             <div className="container">
-              <div className="max-w-md flex flex-col gap-y-8 py-8">
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-wide font-head">Landing template for startups</h2>
-                <p className="text-slate-400 font-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, aliquam illum et 
-                  totam cupiditate ut adipisci a hic, nostrum, consectetur iure accusamus dignissimos inventore soluta.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button textTransform={"uppercase"} variant="my" >Free orders now</Button>
-                  <Button textTransform={"uppercase"} variant="my" >get in touch</Button>
+              <Box
+                className='flex flex-col h-full pb-32 lg:pb-0 lg:flex-row justify-between'
+                bgImage={smoke}
+                bgRepeat={"no-repeat"}
+                bgSize={"contain"}
+                bgPosition={"right"}
+              >
+                <div className="max-w-md flex flex-col gap-y-8 py-8">
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-wide font-head">Landing template for startups</h2>
+                  <p className="text-slate-400 font-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, aliquam illum et 
+                    totam cupiditate ut adipisci a hic, nostrum, consectetur iure accusamus dignissimos inventore soluta.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Button textTransform={"uppercase"} variant="my" >Free orders now</Button>
+                    <Button textTransform={"uppercase"} variant="my" >get in touch</Button>
+                  </div>
                 </div>
-              </div>
+                <div className='flex w-full max-w-2xl relative'>
+                  <Image animation={animation1} src={parasha1} alt="" className='absolute' />
+                  <Image animation={animation2} src={parasha2} alt="" className='absolute' />
+                  <Image animation={animation3} src={parasha3} alt="" className='absolute' />
+                </div>
+              </Box>
             </div>
           </Box>
           <div className="py-10 bg-gradient-to-b from-slate-800 to-teal-400">

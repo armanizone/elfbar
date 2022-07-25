@@ -12,7 +12,13 @@ import elfbar from '../../images/elfbar-logo.jpg'
 import parasha from '../../service/db.json'
 import { ScrollContext } from "./Main"
 
-const tastes = ['banana', 'blue razz', 'blueberry', 'coffe', 'cranberry grape', 'energy', 'grape', 'kiwi', 'lemon', 'mango', 'watermelon', 'strawberry', 'mojito']
+const tastes = [
+  'banana ice', 'banana milk', 'blue razz lemonade', 'blue razz ice', 'blueberry', 
+  'coffe tobacco', 'cranberry grape', 'sakura grape', 'energy', 'grape energy',
+  'grape', 'kiwi passion fruit guava', 'lemon mint', 'mango peach', 'peach mango watermelon', 
+  'strawberry kiwi', 'strawberry mango', 'red mojito', 'watermelon ice', 'mango', 'peach mango guava', 
+  'pineapple peach mango', 'pink lemonade', 'sour apple', 'strawberry energy', 'strawberry banana', 'strawberry grape', 'watermelon'
+]
 
 function Products() {
 
@@ -40,15 +46,15 @@ function Products() {
     switch (name) {
       case "min": 
         setShits(q)
-        setSorted({...sorted, price: "min"})
+        setSorted({puffs: 0, price: 'min', taste: 'all'})
         break
       case "max": 
         setShits(w)
-        setSorted({...sorted, price: "max"})
+        setSorted({puffs: 0, price: 'max', taste: 'all'})
         break
       default: 
         setShits([...all])
-        setSorted({...sorted, price: "all"})
+        setSorted({puffs: 0, price: 'all', taste: 'all'})
         break
     }
   }
@@ -61,23 +67,23 @@ function Products() {
     
     switch (name) {
       case 1500: 
-        setSorted({...sorted, puffs: 1500})
+        setSorted({puffs: 1500, price: 'all', taste: 'all'})
         setShits(q)
         break
       case 3000: 
-        setSorted({...sorted, puffs: 3000})
+        setSorted({puffs: 3000, price: 'all', taste: 'all'})
         setShits(w)
         break
       case 4000: 
-        setSorted({...sorted, puffs: 4000})
+        setSorted({puffs: 4000, price: 'all', taste: 'all'})
         setShits(e)
         break
       case 5000: 
-        setSorted({...sorted, puffs: 5000})
+        setSorted({puffs: 5000, price: 'all', taste: 'all'})
         setShits(r)
         break
       default: 
-        setSorted({...sorted, puffs: 0})
+        setSorted({puffs: 0, price: 'all', taste: 'all'})
         setShits([...all])
         break
     }
@@ -89,10 +95,10 @@ function Products() {
         return e.name?.includes(name)
       })
       setShits(q)
-      setSorted({...sorted, taste: name})
+      setSorted({puffs: 0, price: 'all', taste: name})
       return
     }
-    setSorted({...sorted, taste: 'all'})
+    setSorted({puffs: 0, price: 'all', taste: 'all'})
     setShits([...all])
   }
 
@@ -130,9 +136,9 @@ function Products() {
       <div className="bg-slate-800 lg:h-screen p-6 lg:p-14" ref={target === 'products' ? targetRef : ref}>
         <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] rounded-2xl h-full w-full bg-white shadow-lg overflow-hidden">
           <div className="flex flex-col">   
-            <div className="flex justify-between items-center bg-white">
+            <div className="flex flex-col md:flex-row justify-between items-center bg-white">
               <img src={elfbar} alt="" className="w-36 ml-4" />
-              <div className="hidden lg:flex gap-8 mr-4">
+              <div className="flex gap-8 mr-4">
                 <Menu >
                   <MenuButton className="font-body">
                     Цена

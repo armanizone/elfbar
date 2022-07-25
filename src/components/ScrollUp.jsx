@@ -1,5 +1,4 @@
 import React from 'react'
-import { Icon } from "@chakra-ui/react"
 import { RiArrowUpSFill } from 'react-icons/ri'
 
 function ScrollUp() {
