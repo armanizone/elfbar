@@ -24,7 +24,6 @@ function Hero() {
         transform: translate(0px); 
       }
   `
-
   const prefersReducedMotion = usePrefersReducedMotion()
 
   const animation1 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease-in-out`
