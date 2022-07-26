@@ -1,12 +1,12 @@
 import React from 'react'
 import { Box, Button, Image, keyframes, usePrefersReducedMotion } from "@chakra-ui/react"
 
-import { ScrollContext } from "./Main"
 
 import parasha1 from '../../images/11.png'
 import parasha2 from '../../images/22.png'
 import parasha3 from '../../images/33.png'
 import smoke from '../../images/smoke_wide.png'
+import { ScrollContext } from '../../App'
 
 
 const labels = [
@@ -88,7 +88,7 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
 
   return (
     <Box
-      className="w-full pt-8"
+      className="w-full pt-2 md:pt-8"
       ref={target === 'about' ? targetRef : ref}
     >
         <div className="flex flex-col text-white h-full justify-between">
@@ -97,11 +97,7 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
           >
             <div className="container">
               <Box
-                className='flex flex-col h-full pb-32 lg:pb-0 lg:flex-row justify-between'
-                bgImage={smoke}
-                bgRepeat={"no-repeat"}
-                bgSize={"contain"}
-                bgPosition={"right"}
+                className='flex flex-col h-full lg:flex-row justify-between'
               >
                 <div className="max-w-md flex flex-col gap-y-8 py-8">
                   <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-wide font-head">Landing template for startups</h2>
@@ -113,11 +109,17 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                     <Button textTransform={"uppercase"} variant="my" >get in touch</Button>
                   </div>
                 </div>
-                <div className='flex w-full max-w-2xl relative'>
+                <Box 
+                  className='flex w-full max-w-2xl relative h-44 lg:h-auto'
+                  bgImage={smoke}
+                  bgRepeat={"no-repeat"}
+                  bgSize={"contain"}
+                  bgPosition={"right"}
+                >
                   <Image animation={animation1} src={parasha1} alt="" className='absolute' />
                   <Image animation={animation2} src={parasha2} alt="" className='absolute' />
                   <Image animation={animation3} src={parasha3} alt="" className='absolute' />
-                </div>
+                </Box>
               </Box>
             </div>
           </Box>

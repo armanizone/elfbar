@@ -1,9 +1,7 @@
 import React from 'react'
 
 import { AiOutlineMail, AiOutlineWhatsApp } from 'react-icons/ai'
-import { ScrollContext } from "../pages/Main/Main"
-
-
+import { ScrollContext } from '../App'
 
 function Navbar() {
 

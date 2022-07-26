@@ -1,6 +1,10 @@
 import React from 'react'
+import { ScrollContext } from '../App'
 
 function Footer() {
+
+  const { handleScroll } = React.useContext(ScrollContext)
+
   return (
     <footer className="p-4 bg-white shadow md:px-6 md:py-8 dark:bg-gray-900">
       <div className="container">
@@ -11,16 +15,13 @@ function Footer() {
           </a>
           <ul className="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
-              <a href="*" className="mr-4 hover:underline md:mr-6 ">About</a>
+              <span onClick={e => handleScroll('products')}  className="cursor-pointer mr-4 hover:underline md:mr-6 ">Продукты</span>
             </li>
             <li>
-              <a href="*" className="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+              <span onClick={e => handleScroll('about')}  className="cursor-pointer mr-4 hover:underline md:mr-6">Обзор</span>
             </li>
             <li>
-              <a href="*" className="mr-4 hover:underline md:mr-6 ">Licensing</a>
-            </li>
-            <li>
-              <a href="*" className="hover:underline">Contact</a>
+              <span onClick={e => handleScroll('order')}  className="cursor-pointer mr-4 hover:underline md:mr-6 ">Контакты</span>
             </li>
           </ul>
         </div>

@@ -10,7 +10,7 @@ import { IoIosArrowDropupCircle } from 'react-icons/io'
 
 import elfbar from '../../images/elfbar-logo.jpg'
 import parasha from '../../service/db.json'
-import { ScrollContext } from "./Main"
+import { ScrollContext } from '../../App'
 
 const tastes = [
   'banana ice', 'banana milk', 'blue razz lemonade', 'blue razz ice', 'blueberry', 
@@ -227,7 +227,7 @@ function Products() {
           </div>
           {!shit?.name && (
             <div className="bg-teal-400 flex justify-center items-center text-white">
-              <p className="text-xl md:text-2xl lg:text-3xl">Выберите один из товаров</p>
+              <p className="text-xl md:text-2xl lg:text-3xl py-4">Выберите один из товаров</p>
             </div>
           )}
           {shit?.name && (
