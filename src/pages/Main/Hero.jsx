@@ -10,7 +10,6 @@ import smoke from '../../images/smoke.png'
 
 function Hero() {
 
-
   const trans = keyframes` 
     0% 
       {
