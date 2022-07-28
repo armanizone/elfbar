@@ -7,13 +7,15 @@ module.exports = {
     extend: {
       container: {
         center: true,
-        padding: '12px',
+        padding: '16px',
       },
       fontFamily: {
         'body': ['"Rubik", sans-serif'],
-        'head': ['"Raleway", sans-serif']
+        'head': ['"Raleway", sans-serif'],
+        'hero': ['"Secular one", sans-serif'],
+        'mont': ['"Montserrat", sans-serif']
       }
     },
   },
-  plugins: [],
+  plugins: [], 
 }

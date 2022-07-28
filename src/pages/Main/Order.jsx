@@ -4,9 +4,12 @@ import { shitSchema } from "../../service/validation"
 
 import kazakhstan from '../../images/kazakhstan.png'
 import russia from '../../images/russia.png'
+import telegram from '../../images/telegram.png'
+
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from "../../service/firebase"
 import { ScrollContext } from '../../App'
+
 
 function Order() {
 
@@ -67,31 +70,37 @@ function Order() {
       >
         <div className="flex flex-col gap-y-5 p-4" >
           <h2  className="text-xl md:text-4xl lg:text-6xl font-extrabold font-head text-white" >
-            Great Ways to Show Your Services
+            Отправьте заявку или свяжитесь с нами 
           </h2>
           <div
             className="text-white py-4 px-4 -mr-0.5"
           >
             <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold font-head mb-2">
-              Start Your Free Trial
+            Выберите оператора страны:
             </h3>
-            <div className='flex gap-4'>
-              <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-slate-200 opacity-75" >
+            <div className='flex flex-col md:flex-row gap-4'>
+              <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
                 <span className="text-black opacity-100">
                   Написать WhatsApp:
                 </span>
                 <img src={russia} alt=""className="w-12 opacity-100" />
               </p>
-              <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-slate-200 opacity-75" >
+              <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
                 <span className="text-black opacity-100">
                   Написать WhatsApp:
                 </span>
                 <img src={kazakhstan} alt="" className="w-12 opacity-100"/>
               </p>
+              <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
+                <span className="text-black opacity-100">
+                  Написать Telegram:
+                </span>
+                <img src={telegram} alt="" className="w-12 opacity-100"/>
+              </p>
             </div>
           </div>
         </div>
-        <form onSubmit={submit} className="flex flex-col gap-y-4 h-full max-w-md p-4">
+        <form onSubmit={submit} className="flex flex-col gap-y-4 h-full md:max-w-md p-4">
             <Input 
               borderRadius={"full"} 
               bgColor={"white"}

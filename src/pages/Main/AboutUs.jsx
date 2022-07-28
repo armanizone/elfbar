@@ -110,11 +110,11 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                   </div>
                 </div>
                 <Box 
-                  className='flex w-full max-w-2xl relative h-44 lg:h-auto'
+                  className='flex w-full max-w-4xl relative h-44 lg:h-auto'
                   bgImage={smoke}
                   bgRepeat={"no-repeat"}
                   bgSize={"contain"}
-                  bgPosition={"right"}
+                  bgPosition={"center"}
                 >
                   <Image animation={animation1} src={parasha1} alt="" className='absolute' />
                   <Image animation={animation2} src={parasha2} alt="" className='absolute' />

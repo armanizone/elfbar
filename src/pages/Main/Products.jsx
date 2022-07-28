@@ -6,7 +6,6 @@ import { Input, IconButton, Tooltip,Box, Menu, MenuButton, MenuList, MenuItem } 
 import { useDebouncedValue } from "@mantine/hooks"
 
 import { BiSearchAlt } from 'react-icons/bi'
-import { IoIosArrowDropupCircle } from 'react-icons/io'
 
 import elfbar from '../../images/elfbar-logo.jpg'
 import parasha from '../../service/db.json'
@@ -24,7 +23,6 @@ function Products() {
 
   const {target, targetRef, ref} = React.useContext(ScrollContext)
   
-  const [opened, setOpened] = React.useState(false);
 
   const [all, setAll] = React.useState([])
   const [shits, setShits] = React.useState([])
@@ -133,12 +131,12 @@ function Products() {
 
   return (
     <>
-      <div className="bg-slate-800 lg:h-screen p-6 lg:p-14" ref={target === 'products' ? targetRef : ref}>
-        <div className="grid grid-cols-1 lg:grid-cols-[70%_30%] rounded-2xl h-full w-full bg-white shadow-lg overflow-hidden">
+      <div className="bg-slate-800 h-full p-4 lg:p-14" ref={target === 'products' ? targetRef : ref}>
+        <div className="grid grid-cols-1 md:grid-cols-[65%_35%] rounded-2xl w-full bg-white shadow-lg overflow-hidden">
           <div className="flex flex-col">   
             <div className="flex flex-col md:flex-row justify-between items-center bg-white">
               <img src={elfbar} alt="" className="w-36 ml-4" />
-              <div className="flex gap-8 mr-4">
+              <div className="flex gap-8 mx-4">
                 <Menu >
                   <MenuButton className="font-body">
                     Цена
@@ -198,7 +196,7 @@ function Products() {
                 </Menu>
               </div>
             </div>
-            <div className="p-4">
+            <div className="p-2 md:p-4">
               <div className="flex justify-between h-16">
                 <div className="flex max-w-xs">
                   <Input bgColor={"white"} placeholder="Поиск по названию..." value={search} onChange={e => setSearch(e.target.value)} />
@@ -215,7 +213,7 @@ function Products() {
                   </Tooltip>
                 </div>
               </div>
-              <div className="max-w-full grid auto-rows-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 overflow-y-scroll max-h-[610px] p-2 ">
+              <div className="max-w-full grid auto-rows-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 overflow-y-scroll max-h-[1050px] p-2 ">
                 {searched.length !== 0 && searched.map((e, i) => {
                   return <Card key={i} shit={e} handleAddToCart={handleAddToCart} handleShow={handleShow} />
                 })}
@@ -227,37 +225,30 @@ function Products() {
           </div>
           {!shit?.name && (
             <div className="bg-teal-400 flex justify-center items-center text-white">
-              <p className="text-xl md:text-2xl lg:text-3xl py-4">Выберите один из товаров</p>
+              <p className="text-lg md:text-xl lg:text-2xl p-4">Выберите один из товаров</p>
             </div>
           )}
           {shit?.name && (
-            <Box className={`${is5000 ? "bg-white" : "bg-teal-400"} grid grid-rows-[60%_40%] lg:h-screen overflow-hidden`}>
-              <Box 
-                className="flex flex-col gap-8 p-4"
-                bgImage={shit?.url}
-                bgSize={`${is5000 ? "contain" : "cover"}`}
-                bgRepeat={"no-repeat"}
-                bgPosition={`${is5000 ? "center" : "bottom"}`}
-              >
-              </Box>
-              {/* <BottomSheet onOpen={open} isOpen={opened} onClose={close} onToggle={onToggle} /> */}
-              <div className={`${opened ? "-translate-y-1/2" : "translate-y-0"} relative transition-all duration-300 ease-in-out h-screen bg-black w-full`}>
-                <div onClick={e => setOpened(q => !q)} className="flex justify-center my-4">
-                  <span className={`${opened ? "rotate-180" : "rotate-0"} transition-all duration-200 text-4xl animate-pulse text-white`}>
-                    <IoIosArrowDropupCircle/>
-                  </span>
-                </div>
+            <Box className={`${is5000 ? "bg-white" : "bg-teal-400"} grid grid-cols-1 h-full overflow-hidden`}>
+              <img 
+                src={shit?.url} 
+                className={`
+                  ${is5000 ? "object-contain object-center lg:max-h-[700px] lg:min-h-[700px] " : "object-cover object-bottom h-full w-full lg:max-h-[700px] lg:min-h-[700px]"}` 
+                }
+                alt="" 
+              />
+              <div className={`relative bg-black w-full py-4`}>
                 <div className="text-white font-body">
-                  <div className="flex justify-between px-4 pb-4">
+                  <div className="flex justify-between gap-x-2 items-end px-4 pb-4">
                     <div>
-                      <h3 className="text-xl md:text-2xl">{shit.puffs === 1500 ? `${shit.puffs} LUX` : `BC${shit.puffs}`}</h3>
-                      <h3 className="uppercase font-head font-semibold text-xl md:text-2xl">{shit.name}</h3>
+                      <h3 className="text-base sm:text-xl md:text-2xl">{shit.puffs === 1500 ? `${shit.puffs} LUX` : `BC${shit.puffs}`}</h3>
+                      <h3 className="uppercase font-head font-semibold text-base sm:text-xl md:text-2xl">{shit.name}</h3>
                     </div>
                     <div className="flex flex-col items-end">
-                      <h3 className="text-xl md:text-2xl">
+                      <h3 className="text-lg sm:text-xl md:text-2xl">
                         {`${shit.priceRub}руб`}
                       </h3>
-                      <h3 className="text-xl md:text-2xl">
+                      <h3 className="text-lg sm:text-xl md:text-2xl">
                         {`${shit?.price}тнг`}
                       </h3>
                     </div>

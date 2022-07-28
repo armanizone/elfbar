@@ -11,7 +11,7 @@ function Main() {
   return (
     <div className="bg-slate-800 relative">
       <Hero/>
-      <Products/>
+      <Products/> 
       <AboutUs/>
       <Order/>
     </div>
