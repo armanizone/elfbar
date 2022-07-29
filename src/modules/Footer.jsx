@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import React from 'react'
 import { flushSync } from 'react-dom'
 import { useNavigate } from 'react-router'
@@ -18,6 +19,7 @@ function Footer() {
       setClicked(q => q + 1)
     })
     if (clicked === 10) {
+      Cookies.set('passed', true, { expires: 1 })
       navigation('/bid')
       setClicked(0)
     }

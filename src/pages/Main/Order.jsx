@@ -147,7 +147,7 @@ function Order() {
               name="whatsapp"
               className={errors?.whatsapp?.[0] && "input-animation"}
             />
-            <Button variant={"my"} type="submit" bgColor={"white"} textColor={"black"} >
+            <Button variant={"my"} type="submit" textColor={"white"} >
               Отправить
             </Button>
         </form>

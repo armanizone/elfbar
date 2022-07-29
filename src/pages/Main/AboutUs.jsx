@@ -11,52 +11,60 @@ import { ScrollContext } from '../../App'
 
 const labels = [
   {
-    label: 'Be productive', 
-    description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis praesentium
-    ipsum voluptatum nesciunt rem quas. Consequuntur deleniti distinctio voluptatibus
-    reprehenderit, non eveniet nobis perspiciatis! Suscipit asperiores commodi molestiae
-    dolor id quas saepe autem nesciunt reiciendis tenetur quae maiores recusandae rerum
-    sunt expedita optio quibusdam minus, pariatur quisquam, ad libero accusamus.`
+    label: '1500LUX', 
+    wrapper: '10',
+    box: '400',
+    carton: '56.2*28*28.5',
+    weight: '19.3',
+    deliveryPrice: '3$/1kg'
   },
   {
-    label: 'Be productive', 
-    description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis praesentium
-    ipsum voluptatum nesciunt rem quas. Consequuntur deleniti distinctio voluptatibus
-    reprehenderit, non eveniet nobis perspiciatis! Suscipit asperiores commodi molestiae
-    dolor id quas saepe autem nesciunt reiciendis tenetur quae maiores recusandae rerum
-    sunt expedita optio quibusdam minus, pariatur quisquam, ad libero accusamus.`
+    label: 'BC3000', 
+    wrapper: '10',
+    box: '300',
+    carton: '56.2*28*28.5',
+    weight: '18.5',
+    deliveryPrice: '3$/1kg'
   },
   {
-    label: 'Be productive', 
-    description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis praesentium
-    ipsum voluptatum nesciunt rem quas. Consequuntur deleniti distinctio voluptatibus
-    reprehenderit, non eveniet nobis perspiciatis! Suscipit asperiores commodi molestiae
-    dolor id quas saepe autem nesciunt reiciendis tenetur quae maiores recusandae rerum
-    sunt expedita optio quibusdam minus, pariatur quisquam, ad libero accusamus.`
+    label: 'BC4000', 
+    wrapper: '10',
+    box: '300',
+    carton: '56.2*28*28.5',
+    weight: '18.9',
+    deliveryPrice: '3$/1kg'
   },
   {
-    label: 'Be productive', 
-    description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis praesentium
-    ipsum voluptatum nesciunt rem quas. Consequuntur deleniti distinctio voluptatibus
-    reprehenderit, non eveniet nobis perspiciatis! Suscipit asperiores commodi molestiae
-    dolor id quas saepe autem nesciunt reiciendis tenetur quae maiores recusandae rerum
-    sunt expedita optio quibusdam minus, pariatur quisquam, ad libero accusamus.`
+    label: 'BC5000', 
+    wrapper: '10',
+    box: '400',
+    carton: '56.2*28*28.5',
+    weight: '19.5',
+    deliveryPrice: '3$/1kg'
+  },
+]
+
+const deliveries = [
+  {
+    label: 'Ориентировочная стоимость доставки',
+    adress: 'Россия: г. Москва',
+    type: '1500LUX-BC3000/4000/5000',
+    box: '300-400',
+    delivery: '65'
   },
   {
-    label: 'Be productive', 
-    description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis praesentium
-    ipsum voluptatum nesciunt rem quas. Consequuntur deleniti distinctio voluptatibus
-    reprehenderit, non eveniet nobis perspiciatis! Suscipit asperiores commodi molestiae
-    dolor id quas saepe autem nesciunt reiciendis tenetur quae maiores recusandae rerum
-    sunt expedita optio quibusdam minus, pariatur quisquam, ad libero accusamus.`
+    label: 'Ориентировочная стоимость доставки',
+    adress: 'Казахстан: г. Нур-Султан',
+    type: '1500LUX-BC3000/4000/5000',
+    box: '300-400',
+    delivery: '58'
   },
   {
-    label: 'Be productive', 
-    description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis praesentium
-    ipsum voluptatum nesciunt rem quas. Consequuntur deleniti distinctio voluptatibus
-    reprehenderit, non eveniet nobis perspiciatis! Suscipit asperiores commodi molestiae
-    dolor id quas saepe autem nesciunt reiciendis tenetur quae maiores recusandae rerum
-    sunt expedita optio quibusdam minus, pariatur quisquam, ad libero accusamus.`
+    label: 'Ориентировочная стоимость доставки',
+    adress: 'Казахстан: г. Алма-ата',
+    type: '1500LUX-BC3000/4000/5000',
+    box: '300-400',
+    delivery: '55'
   },
 ]
 
@@ -100,9 +108,12 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                 className='flex flex-col h-full lg:flex-row justify-between'
               >
                 <div className="max-w-md flex flex-col gap-y-8 py-8">
-                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-wide font-head">Landing template for startups</h2>
-                  <p className="text-slate-400 font-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, aliquam illum et 
-                    totam cupiditate ut adipisci a hic, nostrum, consectetur iure accusamus dignissimos inventore soluta.
+                  <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-wide font-head">
+                    Оригинальные поды напрямую с завода
+                  </h2>
+                  <p className="text-slate-400 font-body">
+                    Оптовая продажа электронных сигарет, доступно по всему СНГ- во все города, цена указана без учета доставки (уточняйте у оператора).
+                    Далее указаны характеристики товара.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button textTransform={"uppercase"} variant="my" >Free orders now</Button>
@@ -110,7 +121,7 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                   </div>
                 </div>
                 <Box 
-                  className='flex w-full max-w-4xl relative h-44 lg:h-auto'
+                  className='flex w-full max-w-4xl relative h-[30vmin] lg:h-auto'
                   bgImage={smoke}
                   bgRepeat={"no-repeat"}
                   bgSize={"contain"}
@@ -125,14 +136,59 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
           </Box>
           <div className="py-10 bg-gradient-to-b from-slate-800 to-teal-400">
             <div className="container mb-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 justify-between items-center">
                 {labels.map((e, i) => {
                   return (
-                    <div className="flex flex-col items-center gap-y-4" key={i}>
-                      <span className="font-semibold text-xl font-head">{e.label}</span>
-                      <p className="text-white font-body">
-                        {e.description}
-                      </p>
+                    <div className="flex flex-col gap-y-4 font-body border p-4 rounded-lg" key={i}>
+                      <span className="font-semibold text-2xl font-mont">{e.label}</span>
+                      <ul className='flex flex-col gap-y-2'>
+                        <li className='text-xl'>
+                          <span>Упаковка:</span>
+                          <span> {e.wrapper}шт</span>
+                        </li>
+                        <li className='text-xl'>
+                          <span>Коробка: </span>
+                          <span>{e.box}шт</span>
+                        </li>
+                        <li className='text-xl'>
+                          <span>Картон:</span>
+                          <span> {e.carton}см</span>
+                        </li>
+                        <li className='text-xl'>
+                          <span>Общий вес: </span>
+                          <span> {e.weight}кг</span>
+                        </li>
+                        <li className='text-xl'>
+                          <span>Стоимость доставки: </span>
+                          <span> {e.weight}кг</span>
+                        </li>
+                      </ul>
+                    </div>
+                  )
+                })}
+              </div>
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8  justify-between items-center mt-8'>
+                {deliveries.map((e, i) => {
+                  return (
+                    <div className='border p-4 rounded-lg' key={i} >
+                      <span className='font-semibold text-xl block mb-4 font-mont'>{e.label}</span>
+                      <ul className='flex flex-col gap-y-2 font-body'>
+                        <li className='text-xl'>
+                          <span>{e.adress}</span>
+                        </li>
+                        <li className='text-xl'>
+                          <span>Вид: </span>
+                          <span>{e.type}</span>
+                        </li>
+                        <li className='text-xl'>
+                          <span>Коробка</span>
+                          <span>{e.box}шт</span>
+                        </li>
+                        <li className='text-xl'>
+                          <span>Доставка: от </span>
+                          <span>{e.delivery}</span>
+                        </li>
+                      </ul>
                     </div>
                   )
                 })}

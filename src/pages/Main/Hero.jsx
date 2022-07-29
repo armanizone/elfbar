@@ -36,17 +36,17 @@ function Hero() {
 
   return (
     <>
-      <div className="relative h-full xl:h-screen bg-teal-400 z-20" ref={target === "hero" ? targetRef : ref}>
+      <div className="relative bg-teal-400 z-20" ref={target === "hero" ? targetRef : ref}>
         <div className="absolute shadow-lg h-full w-full clip-path bg-slate-800 -z-10">
         </div>
         <div className="h-full p-4 md:p-6 lg:-8 xl:p-14">
-          <div className="relative w-full h-full hero-shadow bg-teal-400 z-20 rounded-2xl overflow-hidden">
+          <div className="relative w-full h-full hero-shadow bg-teal-400 z-20 rounded-2xl ">
             <div className="absolute clip-path-inner bg-slate-700 h-full w-full top-0 left-0 -z-10"></div>
             <Navbar/>
             <div className="container">
               <div className='py-8 xl:py-14 h-full flex flex-col md:flex-row justify-between items-start text-white md:px-4'>
                 <div className="z-10 relative pb-14 sm:pb-0">
-                  <div className="text-5xl md:text-6xl lg:text-7xl xl:mb-4 font-bold font-hero" >
+                  <div className="text-[10vmin] xl:mb-4 font-bold font-hero" >
                     ELFBAR SHOP
                   </div>
                   <div className="leading-7 tracking-wider mb-6 text-lg font-semibold max-w-lg">
@@ -63,7 +63,7 @@ function Hero() {
                   >
                     Подробнее
                   </Button>
-                  <div className="flex flex-col font-hero text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-6xl xl:mb-6 font-bold mt-8" >
+                  <div className="flex flex-col font-hero text-[5vmin] xl:mb-6 font-bold mt-8" >
                     <p className='mb-2'>
                       1500 LUX 
                     </p>
@@ -71,7 +71,7 @@ function Hero() {
                   </div>
                 </div>
                 <Box 
-                  className="max-w-xl w-full h-[350px] md:h-[450px] relative z-50 -mt-8"
+                  className="max-w-xl w-full h-[90vmin] md:h-[40vmin] relative z-50"
                 >
                   <div className='z-20'>
                     <Box  
@@ -86,7 +86,7 @@ function Hero() {
                   <div className='absolute top-0 z-20'>
                     <Image animation={animation2} src={parasha3} alt="elfbar 1500 blue" className=''/>
                   </div>
-                  <div className='absolute top-0 z-20'>
+                  <div className='absolute top-0 z-50'>
                     <Image animation={animation4} src={parasha4} alt="elfbar 5000 blue" className=''/> 
                   </div>
                   <div className='absolute top-0 z-10'>
