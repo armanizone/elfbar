@@ -53,6 +53,12 @@ function Order() {
         ...order,
         timestamp: serverTimestamp()
       })
+      .then(e => {
+        console.log(e);
+      })
+      .catch(e => {
+        console.log(e);
+      })
     })
     .catch(e => {
       console.log(e);
@@ -73,7 +79,7 @@ function Order() {
             Отправьте заявку или свяжитесь с нами 
           </h2>
           <div
-            className="text-white py-4 px-4 -mr-0.5"
+            className="text-white"
           >
             <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold font-head mb-2">
             Выберите оператора страны:

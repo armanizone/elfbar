@@ -16,7 +16,7 @@ const labels = [
     box: '400',
     carton: '56.2*28*28.5',
     weight: '19.3',
-    deliveryPrice: '3$/1kg'
+    deliveryPrice: '3$/1'
   },
   {
     label: 'BC3000', 
@@ -24,7 +24,7 @@ const labels = [
     box: '300',
     carton: '56.2*28*28.5',
     weight: '18.5',
-    deliveryPrice: '3$/1kg'
+    deliveryPrice: '3$/1'
   },
   {
     label: 'BC4000', 
@@ -32,7 +32,7 @@ const labels = [
     box: '300',
     carton: '56.2*28*28.5',
     weight: '18.9',
-    deliveryPrice: '3$/1kg'
+    deliveryPrice: '3$/1'
   },
   {
     label: 'BC5000', 
@@ -40,7 +40,7 @@ const labels = [
     box: '400',
     carton: '56.2*28*28.5',
     weight: '19.5',
-    deliveryPrice: '3$/1kg'
+    deliveryPrice: '3$/1'
   },
 ]
 
@@ -50,21 +50,21 @@ const deliveries = [
     adress: 'Россия: г. Москва',
     type: '1500LUX-BC3000/4000/5000',
     box: '300-400',
-    delivery: '65'
+    delivery: '65$'
   },
   {
     label: 'Ориентировочная стоимость доставки',
     adress: 'Казахстан: г. Нур-Султан',
     type: '1500LUX-BC3000/4000/5000',
     box: '300-400',
-    delivery: '58'
+    delivery: '58$'
   },
   {
     label: 'Ориентировочная стоимость доставки',
     adress: 'Казахстан: г. Алма-ата',
     type: '1500LUX-BC3000/4000/5000',
     box: '300-400',
-    delivery: '55'
+    delivery: '55$'
   },
 ]
 
@@ -142,25 +142,25 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                     <div className="flex flex-col gap-y-4 font-body border p-4 rounded-lg" key={i}>
                       <span className="font-semibold text-2xl font-mont">{e.label}</span>
                       <ul className='flex flex-col gap-y-2'>
-                        <li className='text-xl'>
+                        <li className='text-lg'>
                           <span>Упаковка:</span>
                           <span> {e.wrapper}шт</span>
                         </li>
-                        <li className='text-xl'>
+                        <li className='text-lg'>
                           <span>Коробка: </span>
                           <span>{e.box}шт</span>
                         </li>
-                        <li className='text-xl'>
+                        <li className='text-lg'>
                           <span>Картон:</span>
                           <span> {e.carton}см</span>
                         </li>
-                        <li className='text-xl'>
+                        <li className='text-lg'>
                           <span>Общий вес: </span>
                           <span> {e.weight}кг</span>
                         </li>
-                        <li className='text-xl'>
+                        <li className='text-lg'>
                           <span>Стоимость доставки: </span>
-                          <span> {e.weight}кг</span>
+                          <span> {e.deliveryPrice}кг</span>
                         </li>
                       </ul>
                     </div>
@@ -181,7 +181,7 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                           <span>{e.type}</span>
                         </li>
                         <li className='text-xl'>
-                          <span>Коробка</span>
+                          <span>Коробка: </span>
                           <span>{e.box}шт</span>
                         </li>
                         <li className='text-xl'>
