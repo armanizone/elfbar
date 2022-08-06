@@ -33,7 +33,7 @@ function Navbar() {
                 <TbBrandTelegram/>
               </div>
             </a>
-            <a target="_blank" href="https://wa.me/77081534658?text=Добрый%день%Меня%интересуют%Эльфбары." rel="noreferrer">
+            <a target="_blank" href="https://wa.me/77081534658?text=Добрый день! Я заинтересован в покупке Эльфбаров. Я обращаюсь из города:" rel="noreferrer">
               <div className="md:w-full md:flex md:justify-center relative p-4 md:p-8" >
                 <AiOutlineWhatsApp/>
                 <span className='block absolute top-0 right-0'>
@@ -41,7 +41,7 @@ function Navbar() {
                 </span>
               </div>
             </a>
-            <a target="_blank" href="https://wa.me/79773067130?text=Добрый%день%Меня%интересуют%Эльфбары." rel="noreferrer">
+            <a target="_blank" href="https://wa.me/79773067130?text=Добрый день! Я заинтересован в покупке Эльфбаров. Я обращаюсь из города:" rel="noreferrer">
               <div className="md:border-x md:w-full md:flex md:justify-center relative p-4 md:p-8" >
                 <AiOutlineWhatsApp/>
                 <span className='block absolute top-0 right-0'>

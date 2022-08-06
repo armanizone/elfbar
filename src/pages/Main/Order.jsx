@@ -85,7 +85,7 @@ function Order() {
             Выберите оператора страны:
             </h3>
             <div className='flex flex-col md:flex-row gap-4'>
-              <a target="_blank" href="https://wa.me/79773067130?text=Добрый%день%Меня%интересуют%Эльфбары." rel="noreferrer">
+              <a target="_blank" href="https://wa.me/79773067130?text=Добрый день! Я заинтересован в покупке Эльфбаров. Я обращаюсь из города:" rel="noreferrer">
                 <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
                   <span className="text-black opacity-100">
                     Написать WhatsApp:
@@ -94,7 +94,7 @@ function Order() {
                 </p>
               </a>
 
-              <a target="_blank" href="https://wa.me/77081534658?text=Добрый%день%Меня%интересуют%Эльфбары." rel="noreferrer">
+              <a target="_blank" href="https://wa.me/77081534658?text=Добрый день! Я заинтересован в покупке Эльфбаров. Я обращаюсь из города:" rel="noreferrer">
                 <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
                   <span className="text-black opacity-100">
                     Написать WhatsApp:
