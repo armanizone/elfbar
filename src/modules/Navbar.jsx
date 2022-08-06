@@ -2,7 +2,6 @@ import React from 'react'
 
 import { AiOutlineWhatsApp } from 'react-icons/ai'
 import { TbBrandTelegram } from 'react-icons/tb'
-import { Link } from 'react-router-dom'
 import { ScrollContext } from '../App'
 
 import logo from '../images/logo.png'
@@ -19,9 +18,9 @@ function Navbar() {
       <div className="container md:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center ">
           <div>
-            <Link to={"/"}>
+            <span>
               <img src={logo} alt="" className='w-20 object-cover object-center my-2' />
-            </Link>
+            </span>
           </div>
           <div className="flex gap-6 font-semibold uppercase text-sm md:text-lg font-head my-4 md:my-0">
             <p onClick={e => handleScroll('products')} className="cursor-pointer">Продукты</p>

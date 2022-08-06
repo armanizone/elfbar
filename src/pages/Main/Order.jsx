@@ -102,7 +102,6 @@ function Order() {
                   <img src={kazakhstan} alt="" className="w-12 opacity-100"/>
                 </p>
               </a>
-
               <a href="tg://resolve?domain=Abylay_Optobox" rel="noreferrer">
                 <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
                   <span className="text-black opacity-100">
@@ -115,6 +114,7 @@ function Order() {
           </div>
         </div>
         <form onSubmit={submit} className="flex flex-col gap-y-4 h-full md:max-w-md p-4">
+          <p className='block sm:hidden text-white text-lg font-semibold font-head'>Форма заявки:</p>
             <Input 
               borderRadius={"full"} 
               bgColor={"white"}
