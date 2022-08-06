@@ -35,7 +35,7 @@ function App() {
         <div>
           <Routes>
             <Route path="/" element={<Main/>} />
-            <Route path="/bid" element={<Bid/>}/>
+            {/* <Route path="/bid" element={<Bid/>}/> */}
           </Routes>
           <ScrollUp/>
         </div>

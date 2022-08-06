@@ -11,7 +11,7 @@ import { ScrollContext } from '../../App'
 
 function Hero() {
 
-  const {target, targetRef, ref} = React.useContext(ScrollContext)
+  const {target, targetRef, ref, handleScroll} = React.useContext(ScrollContext)
 
   const trans = keyframes` 
     0% 
@@ -60,6 +60,7 @@ function Hero() {
                     textTransform={"uppercase"}
                     letterSpacing={"wider"}
                     className="font-head w-fit"
+                    onClick={e => handleScroll('about')}
                   >
                     Подробнее
                   </Button>

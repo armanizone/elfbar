@@ -71,7 +71,7 @@ const deliveries = [
 
 function AboutUs() {
 
-  const {target, targetRef, ref} = React.useContext(ScrollContext)
+  const {target, targetRef, ref, handleScroll} = React.useContext(ScrollContext)
 
   const trans = keyframes` 
   0% 
@@ -116,8 +116,7 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                     Далее указаны характеристики товара.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button textTransform={"uppercase"} variant="my" >Free orders now</Button>
-                    <Button textTransform={"uppercase"} variant="my" >get in touch</Button>
+                    <Button textTransform={"uppercase"} variant="my" onClick={e => handleScroll('order')} >Узнать подробнее</Button>
                   </div>
                 </div>
                 <Box 
@@ -167,7 +166,7 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                   )
                 })}
               </div>
-              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8  justify-between items-center mt-8'>
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 justify-between items-center mt-4 md:mt-8'>
                 {deliveries.map((e, i) => {
                   return (
                     <div className='border p-4 rounded-lg' key={i} >

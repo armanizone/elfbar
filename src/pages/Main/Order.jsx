@@ -85,24 +85,32 @@ function Order() {
             Выберите оператора страны:
             </h3>
             <div className='flex flex-col md:flex-row gap-4'>
-              <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
-                <span className="text-black opacity-100">
-                  Написать WhatsApp:
-                </span>
-                <img src={russia} alt=""className="w-12 opacity-100" />
-              </p>
-              <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
-                <span className="text-black opacity-100">
-                  Написать WhatsApp:
-                </span>
-                <img src={kazakhstan} alt="" className="w-12 opacity-100"/>
-              </p>
-              <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
-                <span className="text-black opacity-100">
-                  Написать Telegram:
-                </span>
-                <img src={telegram} alt="" className="w-12 opacity-100"/>
-              </p>
+              <a target="_blank" href="https://api.whatsapp.com/send?phone=79773067130&%Добрый%день!%Меня%интересуют%Эльфбары.%" rel="noreferrer">
+
+                <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
+                  <span className="text-black opacity-100">
+                    Написать WhatsApp:
+                  </span>
+                  <img src={russia} alt=""className="w-12 opacity-100" />
+                </p>
+              </a>
+              <a target="_blank" href="https://api.whatsapp.com/send?phone=77081534658&%Добрый%день!%Меня%интересуют%Эльфбары.%" rel="noreferrer">
+                <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
+                  <span className="text-black opacity-100">
+                    Написать WhatsApp:
+                  </span>
+                  <img src={kazakhstan} alt="" className="w-12 opacity-100"/>
+                </p>
+              </a>
+
+              <a href="tg://resolve?domain=Abylay_Optobox" rel="noreferrer">
+                <p className="inline-flex items-center gap-4 text-sm border p-2 cursor-pointer rounded-xl mb-4 justify-center bg-white" >
+                  <span className="text-black opacity-100">
+                    Написать Telegram:
+                  </span>
+                  <img src={telegram} alt="" className="w-12 opacity-100"/>
+                </p>
+              </a>
             </div>
           </div>
         </div>

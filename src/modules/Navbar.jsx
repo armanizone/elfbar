@@ -29,21 +29,27 @@ function Navbar() {
             <p onClick={e => handleScroll('order')} className="cursor-pointer">Контакты</p>
           </div>
           <div className="flex text-2xl justify-between w-full items-center md:w-auto">
-            <div className="md:border-x md:w-full md:flex md:justify-center p-4 md:p-8" >
-              <TbBrandTelegram/>
-            </div>
-            <div className="md:w-full md:flex md:justify-center relative p-4 md:p-8" >
-              <AiOutlineWhatsApp/>
-              <span className='block absolute top-0 right-0'>
-                <img src={kazakhstan} alt="" className='w-6' />
-              </span>
-            </div>
-            <div className="md:border-x md:w-full md:flex md:justify-center relative p-4 md:p-8" >
-              <AiOutlineWhatsApp/>
-              <span className='block absolute top-0 right-0'>
-                <img src={russia} alt="" className='w-6' />
-              </span>
-            </div>
+            <a href="tg://resolve?domain=Abylay_Optobox" rel="noreferrer">
+              <div className="md:border-x md:w-full md:flex md:justify-center p-4 md:p-8" >
+                <TbBrandTelegram/>
+              </div>
+            </a>
+            <a target="_blank" href="https://api.whatsapp.com/send?phone=77081534658&%Добрый%день!%Меня%интересуют%Эльфбары.%" rel="noreferrer">
+              <div className="md:w-full md:flex md:justify-center relative p-4 md:p-8" >
+                <AiOutlineWhatsApp/>
+                <span className='block absolute top-0 right-0'>
+                  <img src={kazakhstan} alt="" className='w-6' />
+                </span>
+              </div>
+            </a>
+            <a target="_blank" href="https://api.whatsapp.com/send?phone=79773067130&%Добрый%день!%Меня%интересуют%Эльфбары.%" rel="noreferrer">
+              <div className="md:border-x md:w-full md:flex md:justify-center relative p-4 md:p-8" >
+                <AiOutlineWhatsApp/>
+                <span className='block absolute top-0 right-0'>
+                  <img src={russia} alt="" className='w-6' />
+                </span>
+              </div>
+            </a>
           </div>
         </div>
       </div>
