@@ -72,7 +72,7 @@ function Hero() {
                   </div>
                 </div>
                 <Box 
-                  className="max-w-xl w-full h-[90vmin] md:h-[40vmin] relative z-50"
+                  className="max-w-xl w-full h-[84vw] md:h-[40vmin] relative z-50"
                 >
                   <div className='z-20'>
                     <Box  

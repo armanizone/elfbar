@@ -48,21 +48,21 @@ const deliveries = [
   {
     label: 'Ориентировочная стоимость доставки',
     adress: 'Россия: г. Москва',
-    type: '1500LUX-BC3000/4000/5000',
+    type: '1500LUX/BC3000/4000/5000',
     box: '300-400',
     delivery: '65$'
   },
   {
     label: 'Ориентировочная стоимость доставки',
     adress: 'Казахстан: г. Нур-Султан',
-    type: '1500LUX-BC3000/4000/5000',
+    type: '1500LUX/BC3000/4000/5000',
     box: '300-400',
     delivery: '58$'
   },
   {
     label: 'Ориентировочная стоимость доставки',
     adress: 'Казахстан: г. Алма-ата',
-    type: '1500LUX-BC3000/4000/5000',
+    type: '1500LUX/BC3000/4000/5000',
     box: '300-400',
     delivery: '55$'
   },
@@ -120,7 +120,7 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                   </div>
                 </div>
                 <Box 
-                  className='flex w-full max-w-4xl relative h-[30vmin] lg:h-auto'
+                  className='flex w-full max-w-4xl relative h-[55vmin] sm:[50vmin] lg:h-auto'
                   bgImage={smoke}
                   bgRepeat={"no-repeat"}
                   bgSize={"contain"}
