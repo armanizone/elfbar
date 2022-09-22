@@ -107,7 +107,7 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
               <Box
                 className='flex flex-col h-full lg:flex-row justify-between'
               >
-                <div className="max-w-md flex flex-col gap-y-8 py-8">
+                <div className="max-w-md flex flex-col gap-y-8 md:py-8">
                   <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-wide font-head">
                     Оригинальные поды напрямую с завода
                   </h2>
@@ -126,14 +126,14 @@ const animation3 = prefersReducedMotion ? undefined : `${trans} infinite 3s ease
                   bgSize={"contain"}
                   bgPosition={"center"}
                 >
-                  <Image animation={animation1} src={parasha1} alt="" className='absolute' />
-                  <Image animation={animation2} src={parasha2} alt="" className='absolute' />
-                  <Image animation={animation3} src={parasha3} alt="" className='absolute' />
+                  <Image animation={animation1} src={parasha1} alt="" className='absolute top-[20%] md:top-0' />
+                  <Image animation={animation2} src={parasha2} alt="" className='absolute top-[20%] md:top-0' />
+                  <Image animation={animation3} src={parasha3} alt="" className='absolute top-[20%] md:top-0' /> 
                 </Box>
               </Box>
             </div>
           </Box>
-          <div className="py-10 bg-gradient-to-b from-slate-800 to-teal-400">
+          <div className="md:py-5 bg-gradient-to-b from-slate-800 to-teal-400">
             <div className="container mb-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 justify-between items-center">
                 {labels.map((e, i) => {

@@ -279,8 +279,8 @@ function Products() {
                       <span>{shit.puffs}</span>
                     </li>
                   </ul>
-                  <div className="p-4 text-slate-300">
-                    <p>
+                  <div className="px-4 pt-4 text-slate-300">
+                    <p className='text-sm'>
                       (Никотин вызывает зависимость, а также вредит вашему здоровью)
                     </p>
                   </div>
