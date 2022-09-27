@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from "../../components/Card"
+import cn from 'classnames'
 
 import { Input, IconButton, Tooltip,Box, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
 
@@ -127,11 +128,14 @@ function Products() {
     getShits()
   }, [])
 
-  const is5000 = shit.puffs === 5000
+  const is5000 = shit?.puffs === 5000
+  const is4000 = shit?.puffs === 4000
+  const is3000 = shit?.puffs === 3000
+  const is1500 = shit?.puffs === 1500
 
   return (
     <>
-      <div className="bg-slate-800 h-full p-4 lg:p-14" ref={target === 'products' ? targetRef : ref}>
+      <div className="bg-slate-800 p-4 lg:p-14" ref={target === 'products' ? targetRef : ref}>
         <div className="grid grid-cols-1 md:grid-cols-[65%_35%] rounded-2xl w-full bg-white shadow-lg overflow-hidden">
           <div className="flex flex-col">   
             <div className="flex flex-col md:flex-row justify-between items-center bg-white">
@@ -213,7 +217,7 @@ function Products() {
                   </Tooltip>
                 </div>
               </div>
-              <div className="max-w-full grid auto-rows-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 overflow-y-scroll max-h-[1050px] p-2 ">
+              <div className="max-w-full grid auto-rows-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 overflow-y-scroll max-h-[1100px] p-2 ">
                 {searched.length !== 0 && searched.map((e, i) => {
                   return <Card key={i} shit={e} handleAddToCart={handleAddToCart} handleShow={handleShow} />
                 })}
@@ -229,19 +233,20 @@ function Products() {
             </div>
           )}
           {shit?.name && (
-            <Box className={`${is5000 ? "bg-white" : "bg-teal-400"} grid grid-cols-1 h-full overflow-hidden`}>
+            <Box className={`flex flex-col h-full overflow-hidden`}>
               <img 
                 src={shit?.url} 
-                className={`
-                  ${is5000 ? "object-contain object-center lg:max-h-[700px] lg:min-h-[700px] " : "object-cover object-bottom h-full w-full lg:max-h-[700px] lg:min-h-[700px]"}` 
-                }
+                className={cn('w-full h-full max-h-[700px]', {
+                  'object-contain': is5000 || is4000 || is3000,
+                  'object-cover': is1500,
+                })}
                 alt="" 
               />
-              <div className={`relative bg-black w-full py-4`}>
+              <div className={`relative bg-black w-full py-4 h-full`}>
                 <div className="text-white font-body">
                   <div className="flex justify-between gap-x-2 items-end px-4 pb-4">
                     <div>
-                      <h3 className="text-base sm:text-xl md:text-2xl">{shit.puffs === 1500 ? `${shit.puffs} LUX` : `BC${shit.puffs}`}</h3>
+                      <h3 className="text-base sm:text-xl md:text-2xl">{is1500 ? `${shit.puffs} LUX` : `BC${shit.puffs}`}</h3>
                       <h3 className="uppercase font-head font-semibold text-base sm:text-xl md:text-2xl">{shit.name}</h3>
                     </div>
                     <div className="flex flex-col items-end">
@@ -254,7 +259,10 @@ function Products() {
                     </div>
                   </div>
                   <div className="p-4">
-                    <p className="italic">{shit.puffs === 1500 ? `"Минимальный заказ от 400 штук"` : `"Минимальный заказ от 300 штук"`}</p>
+                    <p className="italic">{is1500 ? 
+                      "Минимальный заказ от 400 штук, микса разных вкусов" 
+                    : "Минимальный заказ от 300 штук, микс разных вкусов"}
+                    </p>
                   </div>
                   <h3 className="text-xl ml-4 mb-4">Характеристики</h3>
                   <ul className="">
