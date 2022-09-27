@@ -10,6 +10,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from "../../service/firebase"
 import { ScrollContext } from '../../App'
 
+import Confetti from 'react-confetti'
 
 function Order() {
 
@@ -45,6 +46,8 @@ function Order() {
     return setErrors(object);
   }
 
+  const [sended, setSended] = React.useState(false)
+
   const submit = e => {
     e.preventDefault()
     shitSchema.validate(order, { abortEarly: false })
@@ -55,6 +58,7 @@ function Order() {
       })
       .then(e => {
         console.log(e);
+        setSended(true)
       })
       .catch(e => {
         console.log(e);
@@ -65,6 +69,7 @@ function Order() {
       yupErrorToErrorObject(e)
     })
   }
+
 
   return (
     <Box 
@@ -113,58 +118,69 @@ function Order() {
             </div>
           </div>
         </div>
-        <form onSubmit={submit} className="flex flex-col gap-y-4 h-full md:max-w-md p-4">
-          <p className='block sm:hidden text-white text-lg font-semibold font-head'>Форма заявки:</p>
-            <Input 
-              borderRadius={"full"} 
-              bgColor={"white"}
-              placeholder="Как к вам обращаться?" 
-              value={order.name}
-              onChange={handleInput}
-              borderColor={errors?.name?.[0] && "teal.400"}
-              borderWidth={"thick"}
-              name="name"
-              className={errors?.name?.[0] && "input-animation"}
-            />
-            <Input 
-              borderRadius={"full"} 
-              bgColor={"white"}
-              placeholder="Номер телефона" 
-              value={order.tel}
-              onChange={handleInput}
-              borderColor={errors?.tel?.[0] && "teal.400"}
-              borderWidth={"thick"}
-              name="tel"
-              className={errors?.tel?.[0] && "input-animation"}
+        {sended && (
+          <div className='relative md:max-w-md p-4'>
+            <Confetti/>
+            <div className='flex flex-col justify-center items-center h-64 md:h-full'>
+              <h2 className='text-white text-2xl'>Спасибо за вашу заявку!</h2>
+              <p className='text-white text-sm'>с вами свяжутся в ближайшее время</p>
+            </div>
+          </div>
+        )}
+        {!sended && (
+          <form onSubmit={submit} className="relative flex flex-col gap-y-4 h-full md:max-w-md p-4">
+            <p className='block sm:hidden text-white text-lg font-semibold font-head'>Форма заявки:</p>
+              <Input 
+                borderRadius={"full"} 
+                bgColor={"white"}
+                placeholder="Как к вам обращаться?" 
+                value={order.name}
+                onChange={handleInput}
+                borderColor={errors?.name?.[0] && "teal.400"}
+                borderWidth={"thick"}
+                name="name"
+                className={errors?.name?.[0] && "input-animation"}
+              />
+              <Input 
+                borderRadius={"full"} 
+                bgColor={"white"}
+                placeholder="Номер телефона" 
+                value={order.tel}
+                onChange={handleInput}
+                borderColor={errors?.tel?.[0] && "teal.400"}
+                borderWidth={"thick"}
+                name="tel"
+                className={errors?.tel?.[0] && "input-animation"}
 
-            />
-            <Input 
-              borderRadius={"full"} 
-              bgColor={"white"}
-              placeholder="Телеграм" 
-              value={order.telegram}
-              onChange={handleInput}
-              borderColor={errors?.telegram?.[0] && "teal.400"}
-              borderWidth={"thick"}
-              name="telegram"
-              className={errors?.telegram?.[0] && "input-animation"}
+              />
+              <Input 
+                borderRadius={"full"} 
+                bgColor={"white"}
+                placeholder="Телеграм" 
+                value={order.telegram}
+                onChange={handleInput}
+                borderColor={errors?.telegram?.[0] && "teal.400"}
+                borderWidth={"thick"}
+                name="telegram"
+                className={errors?.telegram?.[0] && "input-animation"}
 
-            />
-            <Input 
-              borderRadius={"full"} 
-              bgColor={"white"}
-              placeholder="Ватсап" 
-              value={order.whatsapp}
-              onChange={handleInput}
-              borderColor={errors?.whatsapp?.[0] && "teal.400"}
-              borderWidth={"thick"}
-              name="whatsapp"
-              className={errors?.whatsapp?.[0] && "input-animation"}
-            />
-            <Button variant={"my"} type="submit" textColor={"white"} >
-              Отправить
-            </Button>
-        </form>
+              />
+              <Input 
+                borderRadius={"full"} 
+                bgColor={"white"}
+                placeholder="Ватсап" 
+                value={order.whatsapp}
+                onChange={handleInput}
+                borderColor={errors?.whatsapp?.[0] && "teal.400"}
+                borderWidth={"thick"}
+                name="whatsapp"
+                className={errors?.whatsapp?.[0] && "input-animation"}
+              />
+              <Button variant={"my"} type="submit" textColor={"white"} >
+                Отправить
+              </Button>
+          </form>
+        )}
       </Box>
     </Box>
   )
